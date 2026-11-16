@@ -1,0 +1,16 @@
+help
+info
+ls
+cat README.TXT
+run HELLO
+run FIB
+run SYSINFO
+run CRASH
+test
+date
+uptime
+sleep 250
+disk
+irq
+echo hello from the Type-VM1 shell
+halt

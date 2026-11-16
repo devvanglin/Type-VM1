@@ -1,0 +1,32 @@
+Type-VM1 notes
+============
+
+Memory map
+  0x02000000  CLINT (timer)
+  0x0c000000  PLIC
+  0x10000000  UART 16550
+  0x10001000  virtio-mmio block device
+  0x10003000  machine control (poweroff / reset / yield)
+  0x10100000  goldfish RTC
+  0x80000000  16 MiB of RAM
+
+User programs are linked at 0 and loaded at 0x80400000.  The kernel runs them
+in RISC-V user mode (mstatus.MPP = 0) and returns to the shell on exit or on a
+fault.  System calls use ecall with the call number in a7:
+
+  1  write(a0 = buffer, a1 = length)      -> a0 = length
+  2  exit(a0 = code)                      -> does not return
+  3  putnum(a0 = value, a1 = base)        -> a0 = 0
+  4  putchar(a0 = character)              -> a0 = 0
+  5  getchar()                            -> a0 = character or -1
+  6  time()                               -> a0 = mtime low word
+
+TVX executables start with a 16 byte header:
+  0  "TVX1"
+  4  entry offset
+  8  payload size
+ 12  version (1)
+
+The virtual clock runs at 1 MHz and advances with retired instructions
+(10 instructions per tick), so sleeps are instant on the host but visible in
+the guest.

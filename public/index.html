@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Type-VM1</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000'/%3E%3Crect x='2' y='3' width='8' height='2' fill='%23d8d8d8'/%3E%3Crect x='2' y='7' width='11' height='2' fill='%23d8d8d8'/%3E%3Crect x='2' y='11' width='5' height='2' fill='%23d8d8d8'/%3E%3C/svg%3E">
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #000;
+  }
+  body {
+    overflow: hidden;
+    cursor: text;
+  }
+  #screen {
+    position: fixed;
+    inset: 0;
+    margin: 0;
+    padding: 10px 14px 14px 14px;
+    background: #000;
+    color: #d8d8d8;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+                 "DejaVu Sans Mono", "Liberation Mono", monospace;
+    font-size: 14px;
+    line-height: 1.32;
+    font-variant-ligatures: none;
+    letter-spacing: 0;
+    /* Promote the terminal to its own composited layer: Chrome then renders
+       glyphs with grayscale antialiasing, so text never picks up subpixel
+       colour fringes and the screen stays strictly black and grey. */
+    transform: translateZ(0);
+    will-change: transform;
+    white-space: pre;
+    overflow: auto;
+    outline: none;
+    caret-color: transparent;
+    scrollbar-width: thin;
+    scrollbar-color: #262626 #000;
+  }
+  #screen::-webkit-scrollbar { width: 10px; height: 10px; }
+  #screen::-webkit-scrollbar-track { background: #000; }
+  #screen::-webkit-scrollbar-thumb { background: #262626; }
+  #screen::-webkit-scrollbar-thumb:hover { background: #3a3a3a; }
+  #screen::selection { background: #d8d8d8; color: #000; }
+  .cursor {
+    background: #d8d8d8;
+    color: #000;
+  }
+  .cursor.idle {
+    animation: blink 1.06s steps(1) infinite;
+  }
+  @keyframes blink {
+    50% { background: #000; color: #d8d8d8; }
+  }
+</style>
+</head>
+<body>
+<pre id="screen" tabindex="0" spellcheck="false" autocomplete="off" aria-label="Type-VM1 console"></pre>
+<script type="module" src="/app.js"></script>
+</body>
+</html>

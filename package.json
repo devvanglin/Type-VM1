@@ -1,0 +1,27 @@
+{
+  "name": "type-vm1",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Type-VM1 — a from-scratch RISC-V RV32IM virtual machine: assembler, emulator, devices, drivers and a bootable guest OS, all in TypeScript.",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "keywords": [
+    "riscv",
+    "rv32im",
+    "emulator",
+    "virtual-machine",
+    "assembler",
+    "typescript"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "node scripts/build.ts",
+    "run": "node src/cli.ts run",
+    "web": "node src/cli.ts web --port 8080",
+    "script": "node src/cli.ts script examples/demo.tvt",
+    "test": "node --test --test-reporter=spec tests/assembler.test.ts tests/cpu.test.ts tests/devices.test.ts tests/kernel.test.ts",
+    "screenshot": "node scripts/screenshot.ts"
+  }
+}
